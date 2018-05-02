@@ -60,5 +60,12 @@ DFD Level 2
 > Validating the model  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![alt-text](https://github.com/rajatsharma369007/Image_Classifier_software/blob/master/image/9.JPG)   
 
+---------------------------------------------------------------------------------------------------
+
+you can download the dataset from here : https://www.kaggle.com/c/dogs-vs-cats/data
+
+Folder structure will be like:  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![alt-text](https://github.com/rajatsharma369007/Image_Classifier_software/blob/master/image/10.JPG)
 
 
