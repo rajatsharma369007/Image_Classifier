@@ -30,15 +30,15 @@ validation_generator = datagen.flow_from_directory(
 		
 # creating convolution net
 model = Sequential()
-model.add(Convolution2D(32, 3, 3, input_shape=(img_width, img_height,3)))
+model.add(Convolution2D(32, (3, 3), input_shape=(img_width, img_height,3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Convolution2D(32, 3, 3))
+model.add(Convolution2D(32, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Convolution2D(64, 3, 3))
+model.add(Convolution2D(64, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
@@ -56,16 +56,13 @@ model.compile(loss='binary_crossentropy',
               metrics=['accuracy'])
 			  
 # generating the training
-nb_epoch = 30
-nb_train_samples = 2048
-nb_validation_samples = 832
-
 model.fit_generator(
         train_generator,
-        samples_per_epoch=nb_train_samples,
-        nb_epoch=nb_epoch,
+        steps_per_epoch=128,
+        epochs=30,
+		verbose=1,
         validation_data=validation_generator,
-        nb_val_samples=nb_validation_samples)
+        validation_steps=26)
 		
 # to save our trained model
 model.save_weights('models/basic_cnn_20_epochs.h5')
@@ -74,5 +71,26 @@ model.save_weights('models/basic_cnn_20_epochs.h5')
 #model.load_weights('models_trained/basic_cnn_20_epochs.h5')
 
 # to validate our trained model
-model.evaluate_generator(validation_generator, nb_validation_samples)
+model.evaluate_generator(validation_generator, 26)
 
+while(1):
+	print("enter the image directory or enter 'q' to exit :")
+	dir = input()
+	if(dir == "q"):	
+		break
+	elif((dir[-1] != 'g') and (dir[-2] != 'p') and (dir[-3] != 'j')):
+		print("enter jpg file format")
+		continue
+	else:
+		from keras.preprocessing import image
+		img = image.load_img(dir,target_size=(img_width,img_height))
+		x = image.img_to_array(img)
+		x = np.expand_dims(x, axis=0)
+		images = np.vstack([x])
+		classes = model.predict_classes(images,batch_size=10)
+		  
+		if classes == [[0]]:
+			k = 'cat'
+		else:
+			k = 'dog'
+		print(k)
