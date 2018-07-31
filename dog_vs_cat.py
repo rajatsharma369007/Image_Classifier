@@ -1,3 +1,8 @@
+# this is a program to develop image classifier using keras and tensorflow.
+# Author: Rajat Sharma
+# Date: May, 2018
+
+
 # importing libraries
 import os
 import numpy as np
